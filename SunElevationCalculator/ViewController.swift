@@ -10,6 +10,7 @@ import UIKit
 import CoreLocation
 import MapKit
 
+// global variables
 var times_elevations = [String]()
 var color = Array(repeating: false, count: 288)
 var complete = false
