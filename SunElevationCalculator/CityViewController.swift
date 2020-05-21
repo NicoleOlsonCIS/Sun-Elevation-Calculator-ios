@@ -8,11 +8,18 @@
 import UIKit
 import CoreLocation
 import MapKit
+import CoreData
 
 var time = ""
 var userYear = ""
 var userMonth = ""
 var userDay = ""
+var stored_city = ""
+var current_state = ""
+var current_country = ""
+var locationIQAPIKEY = "530c2414a903dc"
+var geocodioAPIKEY = "641d65e0eeb7eb0b0eeb9d7795d4b66b7594115"
+
 
 class CityViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
 
@@ -27,6 +34,8 @@ class CityViewController: UIViewController, CLLocationManagerDelegate, MKMapView
     @IBOutlet weak var datePicker: UIDatePicker!
     
     @IBOutlet weak var timeIintVar: UISegmentedControl!
+    
+    @IBOutlet var errorLabel: UILabel!
     
     @IBAction func datePickerChange(_ sender: Any)
     {
@@ -49,26 +58,52 @@ class CityViewController: UIViewController, CLLocationManagerDelegate, MKMapView
     }
     
     override func viewDidLoad() {
+
+        // set the color of the date picker
+        datePicker.setValue(UIColor.white, forKey: "textColor")
+        datePicker.setValue(UIColor.black, forKey: "backgroundColor")
+        
+        
+        
+        
+        
+        // get user location from core data
+        getUserLocationFromCoreData()
+        setAsPresets() // will set to nothing if the location retrieval fails
         super.viewDidLoad()
-        locationManager.delegate = self as CLLocationManagerDelegate
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
+        
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    func getUserLocationFromCoreData()
+    {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Current_Location")
         
-        let userLocation: CLLocation = locations[0]
+        request.returnsObjectsAsFaults = false
         
-        print(userLocation)
-        
-        userLocation.fetchCityAndCountry { city, country, error in
-            guard let city = city, let country = country, error == nil else { return }
-            print(city + ", " + country)
-            self.c_city.text = city
-            self.c_country.text = country
-        }
+        do
+        {
+            let results = try context.fetch(request)
+            if results.count > 0
+            {
+                for result in results as! [NSManagedObject]
+                {
+                    if let city = result.value(forKey: "city") as? String { stored_city = city }
+                    if let state = result.value(forKey: "state") as? String { current_state = state }
+                    if let country = result.value(forKey: "country") as? String { current_country = country }
+                }
+            }
+        } catch { print("Could not get results from Core Data in Location call")}
     }
+    
+    func setAsPresets()
+    {
+        c_city.text! = stored_city
+        c_state.text! = current_state
+        c_country.text! = current_country
+    }
+    
     
     @IBAction func getData_City(_ sender: Any)
     {
@@ -76,21 +111,53 @@ class CityViewController: UIViewController, CLLocationManagerDelegate, MKMapView
         var userCountry = c_country.text!
         var userState = c_state.text!
         
-        if userState == "" {userState = "None"}
-        if time == "" {setInterval()}
+        if userState == ""
+        {
+            print("Missing state")
+            missingData(type: "state/prov")
+            //self.view.setNeedsDisplay()
+        }
+        if userCity == ""
+        {
+            print("Missing city")
+            missingData(type: "city")
+            //self.view.setNeedsDisplay()
+        }
+        if userCountry == ""
+        {
+            print("Missing country")
+            missingData(type: "country")
+            //self.view.setNeedsDisplay()
+        }
         
-        // if user did not edit date, set to default (current date)
-        if userDay == "" { setDate()}
+        if userState != "" && userCity != "" && userCountry != ""
+        {
+            print("All fields entered")
+            if time == "" {setInterval()}
+                
+            // if user did not edit date, set to default (current date)
+            if userDay == "" { setDate()}
+                
+            // parse city, state and country, convert to proper format
+            userCity = userCity.replacingOccurrences(of: " ", with: "+", options: .literal, range: nil)
+            userCountry = userCountry.replacingOccurrences(of: " ", with: "+", options: .literal, range: nil)
+            userState = userState.replacingOccurrences(of: " ", with: "+", options: .literal, range: nil)
+            
+            //if userState != "None" { userState = userState.replacingOccurrences(of: " ", with: "+", options: .literal, range: nil)}
+                
+            let fullUrl = root2 + _year + userYear + and + _month + userMonth + and + _day + userDay + and + _city + userCity + and + _country + userCountry + and + _state + userState + and + _interval + time
+                
+            callBackend(fullUrl: fullUrl)
+        }
         
-        // parse city, state and country, convert to proper format
-        userCity = userCity.replacingOccurrences(of: " ", with: "+", options: .literal, range: nil)
-        userCountry = userCountry.replacingOccurrences(of: " ", with: "+", options: .literal, range: nil)
-        if userState != "None" { userState = userState.replacingOccurrences(of: " ", with: "+", options: .literal, range: nil)}
-        
-        let fullUrl = root2 + _year + userYear + and + _month + userMonth + and + _day + userDay + and + _city + userCity + and + _country + userCountry + and + _state + userState + and + _interval + time
-        
-        callBackend(fullUrl: fullUrl)
+        print("Return from IBAction")
     }
+    
+    func missingData(type: String)
+    {
+        errorLabel.text = "Missing fields"
+    }
+    
     
     func callBackend(fullUrl: String)
     {
@@ -110,7 +177,9 @@ class CityViewController: UIViewController, CLLocationManagerDelegate, MKMapView
             task.resume()
         }
     }
+    
 }
+
 
 func setInterval(){ time = "5" }
 func setDate()
@@ -125,3 +194,4 @@ func setDate()
     userMonth = components[1]
     userDay = components[2]
 }
+

@@ -6,9 +6,17 @@
 //  Copyright © 2019 Nicole Olson. All rights reserved.
 //
 
+
+// BUGS
+// When single request does not return properly, then the table mismatch crashes the app with an index out of bounds
+
+
+
+
 import UIKit
 import CoreLocation
 import MapKit
+import CoreData
 
 // global variables
 var times_elevations = [String]()
@@ -19,8 +27,8 @@ var timeInterval = ""
 var day = ""
 var month = ""
 var year = ""
-let root = "https://sun-angle-backend.appspot.com/sun?"
-let root2 = "https://sun-angle-backend.appspot.com/sun_address?"
+let root = "https://sun-elevation-compute.wn.r.appspot.com/sun?"
+let root2 = "https://sun-elevation-compute.wn.r.appspot.com/sun_address?"
 let _year = "year="
 let _month = "month="
 let _day = "day="
@@ -33,6 +41,8 @@ let _state = "state="
 let _country = "country="
 let and = "&"
 let _interval = "interval="
+var r_latitude = ""
+var r_longitude = ""
 
 class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
@@ -51,7 +61,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         let dateFormatter: DateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy"
         let selectedDate: String = dateFormatter.string(from: (sender as AnyObject).date)
-        let components = selectedDate.components(separatedBy: "/")
+        let components = selectedDate.components(separatedBy: "/") 
         print(components)
         month = components[0]
         day = components[1]
@@ -91,13 +101,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         {
             let task = URLSession.shared.dataTask(with: url)
             {
-                (data,response,error)in
+                (data,response,error) in
                 
                 if error != nil { print("Error: Could not get results from server.") }
-                else { if let returnData = String(data: data!, encoding: .utf8)
+                else
                 {
-                    if checkResponse(content: returnData) { times_elevations = formatResponse(content: returnData, time_start: timeInterval)} }
-                else {print("Server Error")}
+                    if let returnData = String(data: data!, encoding: .utf8)
+                    {
+                        if checkResponse(content: returnData) { times_elevations = formatResponse(content: returnData, time_start: timeInterval) }
+                    }
+                    else { print("Server Error") }
                 }
             }
             task.resume()
@@ -106,41 +119,46 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     
     override func viewDidLoad()
     {
+        // set the color of the date picker
+        date.setValue(UIColor.white, forKey: "textColor")
+        date.setValue(UIColor.black, forKey: "backgroundColor")
+        
         super.viewDidLoad()
-        locationManager.delegate = self as CLLocationManagerDelegate
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
+        getUserLocationFromCoreData()
+        setAsPresets()
+    }
+    
+    func getUserLocationFromCoreData()
+    {
+        print("Getting location data from core data")
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Current_Location")
+        
+        request.returnsObjectsAsFaults = false
+        
+        do
+        {
+            let results = try context.fetch(request)
+            if results.count > 0
+            {
+                for result in results as! [NSManagedObject]
+                {
+                    if let l_latitude = result.value(forKey: "latitude") as? String { r_latitude = l_latitude }
+                    if let l_longitude = result.value(forKey: "longitude") as? String { r_longitude = l_longitude }
+                }
+            }
+        } catch { print("Could not get results from Core Data in Location call")}
     }
 
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-        let userLocation: CLLocation = locations[0]
-        
-        let latitude = userLocation.coordinate.latitude
-        
-        let longitude = userLocation.coordinate.longitude
-        
-        let latDelta: CLLocationDegrees = 0.05
-        
-        let lonDelta: CLLocationDegrees = 0.05
-        
-        let span = MKCoordinateSpan(latitudeDelta: latDelta, longitudeDelta: lonDelta)
-        
-        let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        
-        let region = MKCoordinateRegion(center: location, span: span)
-        
-        print(region)
-        
-        //self.map.setRegion(region, animated: true)
-        
-        print(userLocation)
-        
-        lat.text! = String(latitude)
-        long.text! = String(longitude)
+    func setAsPresets()
+    {
+        lat.text! = r_latitude
+        long.text! = r_longitude
     }
+    
 }
+
 
 // check if the list we expect is there
 func checkResponse(content: String) -> Bool

@@ -3,6 +3,36 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "checkResponse(content:):ViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in AlertsViewController.createNotification(date:time:alert_message_title:alert_message_body:):AlertsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "dateComponents.year">
+            </PersistentString>
+            <PersistentString
+               value = "dateComponents">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "AlertsViewController.createNotifications(type:):AlertsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "uptimes">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "AlertsViewController.createNotification(date:time:alert_message_title:alert_message_body:):AlertsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "dateComponents.year">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "formatResponse(content:time_start:):ViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -11,7 +41,35 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "checkResponse(content:):ViewController.swift">
+         contextName = "HomeLocationViewController.validateLocation(city:state:country:):HomeLocationViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "AlertsViewController.parseData(data:type:):AlertsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "dates">
+            </PersistentString>
+            <PersistentString
+               value = "warningtimes">
+            </PersistentString>
+            <PersistentString
+               value = "warningtimes.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "AlertsViewController.getElevationData():AlertsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "longitude">
+            </PersistentString>
+            <PersistentString
+               value = "latitude">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "AlertsViewController.establishOrUpdateCoreDataPresets(entity:key:newvalue:):AlertsViewController.swift">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

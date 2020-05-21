@@ -5,6 +5,11 @@
 //  Created by Nicole Olson on 1/17/20.
 //  Copyright © 2020 Nicole Olson. All rights reserved.
 //
+//
+// BUGS
+// Index out of range when doing multiple table calculations. Has to do with cleariong the global data I think
+// RESULTS MIGHT BE 5 MIN OFF
+
 
 import UIKit
 

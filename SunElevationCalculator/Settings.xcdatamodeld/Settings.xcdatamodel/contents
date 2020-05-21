@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="18G2019" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Current_Location" representedClassName="Current_Location" syncable="YES" codeGenerationType="class">
+        <attribute name="city" optional="YES" attributeType="String"/>
+        <attribute name="country" optional="YES" attributeType="String"/>
+        <attribute name="latitude" optional="YES" attributeType="String"/>
+        <attribute name="longitude" optional="YES" attributeType="String"/>
+        <attribute name="state" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Down_Notification" representedClassName="Down_Notification" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Location" representedClassName="Location" syncable="YES">
+        <attribute name="city" optional="YES" attributeType="String"/>
+        <attribute name="country" optional="YES" attributeType="String"/>
+        <attribute name="latitude" optional="YES" attributeType="String"/>
+        <attribute name="longitude" optional="YES" attributeType="String"/>
+        <attribute name="state" optional="YES" attributeType="String"/>
+        <relationship name="switches" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Presets"/>
+    </entity>
+    <entity name="Presets" representedClassName="Presets" syncable="YES">
+        <attribute name="down_switch" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="thirty_switch" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="up_switch" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="Sun_Data" representedClassName="Sun_Data" syncable="YES">
+        <attribute name="day" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="down" optional="YES" attributeType="String" customClassName="[String]"/>
+        <attribute name="month" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="up" optional="YES" attributeType="String" customClassName="[String]"/>
+        <attribute name="warning" optional="YES" attributeType="String" customClassName="[String]"/>
+        <attribute name="year" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="place" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location"/>
+    </entity>
+    <entity name="Up_Notification" representedClassName="Up_Notification" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Warning_Notification" representedClassName="Warning_Notification" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="Down_Notification" positionX="-108.75" positionY="-133.078125" width="128" height="58"/>
+        <element name="Location" positionX="-365.9609375" positionY="-175.71484375" width="128" height="133"/>
+        <element name="Presets" positionX="-604.7265625" positionY="-210.16015625" width="128" height="88"/>
+        <element name="Sun_Data" positionX="9" positionY="99" width="128" height="148"/>
+        <element name="Up_Notification" positionX="-14.11328125" positionY="-241.8828125" width="128" height="58"/>
+        <element name="Warning_Notification" positionX="-165.34375" positionY="-242.140625" width="128" height="58"/>
+        <element name="Current_Location" positionX="-405" positionY="-99" width="128" height="118"/>
+    </elements>
+</model>
