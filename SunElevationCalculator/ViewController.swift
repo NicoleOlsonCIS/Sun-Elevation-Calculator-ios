@@ -6,12 +6,26 @@
 //  Copyright © 2019 Nicole Olson. All rights reserved.
 //
 
+// HOW TO DO AUTOLAYOUT AND SCROLLVIEWS AND OTHER TIPS ON LAYOUT
 
-// BUGS
+// put stuff inside another view (UIVIEW) that you want to move together. Align the things inside to the view. Then you can put that ivew in different places for different layouts.
+// Click "vary by traits" in bottom right
+// iPhone 8, iPhone 11 horizontal, and iPad (either) all need to be set, as those will catch the three variations
+// To do scroll view: https://stackoverflow.com/questions/36028493/add-a-scrollview-to-existing-view Note that you can set the size of scroll view per Width-Height configuration (vary by traits)
+// Make sure to add heights and widths to things first before alignment where relevant, as the alignment settings will change dimensions of some things (like buttons, labels, etc)
+// Control drag to do the "leading space to container" type thing
+// Side note: setting something called "Equal Widths" with the above control drag is what allows things to be readjusted in terms of width or hiegth when the screen size changes. I didn't utilize this this time.
+// Note: If an thing keeps trying to align itself with something far away, it's possible that you need to move where it is in the left panel (the list of all things on the page)
+// Another note (this time about transitions): you need to "present modally" "full screen" or else you get an overlay thing with transitions/manual segues
+// I couoldn't figure out how to change font size for screen size. I could try to do this for the next version.
+
+
+// REMAINING BUGS
 // When single request does not return properly, then the table mismatch crashes the app with an index out of bounds
-
-
-
+// Start over crash of not clearing the table array or something
+// Handle New Foundland bug (30 min offset timezone issue)
+// Index out of range when doing multiple table calculations. Has to do with cleariong the global data I think
+// RESULTS MIGHT BE 5 MIN OFF
 
 import UIKit
 import CoreLocation
@@ -55,6 +69,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     @IBOutlet weak var date: UIDatePicker!
     
     @IBOutlet weak var interval: UISegmentedControl!
+    
+    @IBOutlet var scrollView: UIScrollView!
     
     @IBAction func getDate(_ sender: Any)
     {
@@ -119,6 +135,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     
     override func viewDidLoad()
     {
+        
+        scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height+80)
+        scrollView.contentOffset.x = 0
         // set the color of the date picker
         date.setValue(UIColor.white, forKey: "textColor")
         date.setValue(UIColor.black, forKey: "backgroundColor")

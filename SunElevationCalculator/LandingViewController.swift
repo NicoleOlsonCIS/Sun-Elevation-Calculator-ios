@@ -10,6 +10,7 @@
 //  When the user clicks any button, the page gets the users current location and
 //  creates it in core data.
 //  Each page that the buttons go to (except lat/long because these are efficient and uncomplicated by missing state data) are not segued until this data is created
+//  Unless the user does "not allow", then you get transfered with no Core Data on location, which just means things don't get prepopulated
 //  When the new pages open, they don't need to do any API or Core Locaiton calls, they just need to consult Core Data
 //  If User Location cannot be found for some reason, or the user declines permissions, the pre-populated fields are simply blank.
 //
@@ -44,9 +45,8 @@ class LandingViewController: UIViewController, CLLocationManagerDelegate, MKMapV
     var widthMultiplier = 0.0
     var heightMultiplier = 0.0
     
-    @IBOutlet var scrollview: UIScrollView!
-    // button variables
-    
+
+    @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var city_button: UIButton!
     @IBOutlet var coordinate_button: UIButton!
     @IBOutlet var alerts_button: UIButton!
@@ -277,8 +277,8 @@ class LandingViewController: UIViewController, CLLocationManagerDelegate, MKMapV
     {
         super.viewDidLoad()
         
-        scrollview.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height+400)
-        scrollview.contentOffset.x = 0
+        scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height+80)
+        scrollView.contentOffset.x = 0
         
         segueToName = ""
         // reset the result arrays BUG IN THIS STILL

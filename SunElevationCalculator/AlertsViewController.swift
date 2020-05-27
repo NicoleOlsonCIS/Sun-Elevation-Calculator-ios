@@ -57,6 +57,8 @@ class AlertsViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     var locationManager = CLLocationManager()
     
+    @IBOutlet var scrollView: UIScrollView!
+    
     @IBOutlet weak var lat: UILabel!
     
     @IBOutlet weak var long: UILabel!
@@ -77,6 +79,9 @@ class AlertsViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     override func viewDidLoad() {
 
+        //scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height+80)
+        //scrollView.contentOffset.x = 0
+        
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         let context = appDelegate.persistentContainer.viewContext

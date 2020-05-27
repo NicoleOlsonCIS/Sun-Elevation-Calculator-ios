@@ -37,6 +37,9 @@ class CityViewController: UIViewController, CLLocationManagerDelegate, MKMapView
     
     @IBOutlet var errorLabel: UILabel!
     
+    @IBOutlet var scrollView: UIScrollView!
+    
+    
     @IBAction func datePickerChange(_ sender: Any)
     {
         let dateFormatter: DateFormatter = DateFormatter()
@@ -62,7 +65,8 @@ class CityViewController: UIViewController, CLLocationManagerDelegate, MKMapView
         // set the color of the date picker
         datePicker.setValue(UIColor.white, forKey: "textColor")
         datePicker.setValue(UIColor.black, forKey: "backgroundColor")
-        
+        scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height+80)
+        scrollView.contentOffset.x = 0
         
         
         

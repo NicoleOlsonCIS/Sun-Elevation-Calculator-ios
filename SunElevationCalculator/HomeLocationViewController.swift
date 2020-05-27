@@ -175,7 +175,10 @@ class HomeLocationViewController: UIViewController, CLLocationManagerDelegate, M
                             if newresult1 == "400"
                             {
                                 print("400 returned!")
-                                self.error_label.text = "Location unfound. Please try again."
+                                DispatchQueue.main.sync(execute: {
+                                    print("DONE GETTING LOCATION DATA")
+                                    self.error_label.text = "Location unfound."
+                                })
                             }
                             else
                             {

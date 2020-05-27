@@ -53,7 +53,7 @@ class AlertsGetStartedViewController: UIViewController, CLLocationManagerDelegat
                 bottom_button.isEnabled = true
                 bottom_button.setTitle("Reset Location", for: [])
                 bottom_button.setTitleColor(UIColor.white, for: [])
-                bottom_button.backgroundColor = UIColor.blue
+                bottom_button.backgroundColor = UIColor.green
                 
                 for result in results as! [NSManagedObject]
                 {

@@ -12,9 +12,7 @@
 		87332EDB23D68754004D9AF0 /* CityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87332EDA23D68754004D9AF0 /* CityViewController.swift */; };
 		875672342444F53E00E1321D /* HomeLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875672332444F53E00E1321D /* HomeLocationViewController.swift */; };
 		875672382445095700E1321D /* AlertsGetStartedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875672372445095700E1321D /* AlertsGetStartedViewController.swift */; };
-		8782A43B243BA47A002AC590 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8782A43A243BA47A002AC590 /* HelpViewController.swift */; };
 		8782A43D243BA647002AC590 /* AlertsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8782A43C243BA647002AC590 /* AlertsViewController.swift */; };
-		8782A43F243BA686002AC590 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8782A43E243BA686002AC590 /* AboutViewController.swift */; };
 		8782A442243D4CBF002AC590 /* Settings.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8782A440243D4CBF002AC590 /* Settings.xcdatamodeld */; };
 		878CD8C924536EAC0061804B /* TransitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878CD8C824536EAC0061804B /* TransitionViewController.swift */; };
 		87AC6185238E1B3C00CAD520 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AC6184238E1B3C00CAD520 /* AppDelegate.swift */; };
@@ -36,9 +34,7 @@
 		87332EDA23D68754004D9AF0 /* CityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityViewController.swift; sourceTree = "<group>"; };
 		875672332444F53E00E1321D /* HomeLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeLocationViewController.swift; sourceTree = "<group>"; };
 		875672372445095700E1321D /* AlertsGetStartedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertsGetStartedViewController.swift; sourceTree = "<group>"; };
-		8782A43A243BA47A002AC590 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		8782A43C243BA647002AC590 /* AlertsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertsViewController.swift; sourceTree = "<group>"; };
-		8782A43E243BA686002AC590 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		8782A441243D4CBF002AC590 /* Settings.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Settings.xcdatamodel; sourceTree = "<group>"; };
 		878CD8C824536EAC0061804B /* TransitionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionViewController.swift; sourceTree = "<group>"; };
 		87AC6181238E1B3C00CAD520 /* SunElevationCalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SunElevationCalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -99,9 +95,7 @@
 				878CD8C824536EAC0061804B /* TransitionViewController.swift */,
 				875672372445095700E1321D /* AlertsGetStartedViewController.swift */,
 				875672332444F53E00E1321D /* HomeLocationViewController.swift */,
-				8782A43E243BA686002AC590 /* AboutViewController.swift */,
 				8782A43C243BA647002AC590 /* AlertsViewController.swift */,
-				8782A43A243BA47A002AC590 /* HelpViewController.swift */,
 				87332EDA23D68754004D9AF0 /* CityViewController.swift */,
 				87332ED823D68724004D9AF0 /* LandingViewController.swift */,
 				87C8266323D282C100FACEC5 /* SecondViewController.swift */,
@@ -188,7 +182,6 @@
 				87B79CB5244E6CB30043C99E /* Location+CoreDataClass.swift in Sources */,
 				87B79CBA244F66E10043C99E /* Presets+CoreDataProperties.swift in Sources */,
 				87C8266423D282C100FACEC5 /* SecondViewController.swift in Sources */,
-				8782A43B243BA47A002AC590 /* HelpViewController.swift in Sources */,
 				8782A43D243BA647002AC590 /* AlertsViewController.swift in Sources */,
 				87332EDB23D68754004D9AF0 /* CityViewController.swift in Sources */,
 				875672382445095700E1321D /* AlertsGetStartedViewController.swift in Sources */,
@@ -198,7 +191,6 @@
 				87332ED923D68724004D9AF0 /* LandingViewController.swift in Sources */,
 				875672342444F53E00E1321D /* HomeLocationViewController.swift in Sources */,
 				8782A442243D4CBF002AC590 /* Settings.xcdatamodeld in Sources */,
-				8782A43F243BA686002AC590 /* AboutViewController.swift in Sources */,
 				87AC6185238E1B3C00CAD520 /* AppDelegate.swift in Sources */,
 				87B79CB6244E6CB30043C99E /* Location+CoreDataProperties.swift in Sources */,
 			);
