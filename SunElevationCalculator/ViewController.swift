@@ -19,13 +19,9 @@
 // Another note (this time about transitions): you need to "present modally" "full screen" or else you get an overlay thing with transitions/manual segues
 // I couoldn't figure out how to change font size for screen size. I could try to do this for the next version.
 
-
 // REMAINING BUGS
-// When single request does not return properly, then the table mismatch crashes the app with an index out of bounds
-// Start over crash of not clearing the table array or something
 // Handle New Foundland bug (30 min offset timezone issue)
-// Index out of range when doing multiple table calculations. Has to do with cleariong the global data I think
-// RESULTS MIGHT BE 5 MIN OFF
+
 
 import UIKit
 import CoreLocation
@@ -96,6 +92,30 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     {
         let userLat = lat.text!
         let userLong = long.text!
+        
+        /* This just froze the program, could be a threading issue. Maybe try to add this feature back later
+        if let floatlat = Float(userLat)
+        {
+            if let floatlong = Float(userLong)
+            {
+                if floatlat > 90 || floatlat < -90
+                {
+                    print("LAT OUT OF RANGE")
+                    //lat.textColor = UIColor.red
+                    return
+                }
+                if floatlong > 90 || floatlong < -90
+                {
+                    print("LONG OUT OF RANGE")
+                    //long.textColor =  UIColor.red
+                    return
+                }
+
+            }
+            else { print("Could not convert longitude to float.") }
+        }
+        else { print("Could not convert latitude to float.")}
+        */
         
         if day == "" {setDateLatLong()}
         if timeInterval == "" {setIntervalLatLong()}
